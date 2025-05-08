@@ -72,6 +72,15 @@ function createUI() {
 @keyframes floatUp {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-50px); opacity: 0; }
+
+// Inside the CSS in applyStyles()
+"#cookie { width: 150px; height: 150px; }" // Smaller cookie for mobile
+
+"@media (max-width: 600px) {" + // Mobile-specific styles
+  "#upgrades { flex-direction: column; }" +
+  ".upgrade { padding: 15px; font-size: 16px; }" +
+  "#cookie { width: 120px; height: 120px; }" +
+"}"
 }
     // Title
     const title = document.createElement('h1');
@@ -107,6 +116,17 @@ function createUI() {
     setTimeout(() => { cookieElement.style.transform = 'scale(1)'; }, cookieElement.addEventListener('click', () => {
     cookies += 1 * getPrestigeMultiplier();
     totalCookiesClicked += 1;
+        // Modify your cookie click event listener:
+cookieElement.addEventListener('touchstart', () => {
+  cookieElement.style.transform = 'scale(0.9)';
+});
+
+cookieElement.addEventListener('touchend', () => {
+  cookieElement.style.transform = 'scale(1)';
+  cookies += 1 * getPrestigeMultiplier();
+  createFloatingNumber();
+  updateUI();
+});
     
     checkAchievements();
     updateUI();
