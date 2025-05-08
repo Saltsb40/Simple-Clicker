@@ -74,6 +74,8 @@ function createUI() {
     100% { transform: translateY(-50px); opacity: 0; }
 
 // Inside the CSS in applyStyles()
+"html { touch-action: manipulation; }" // Disables double-tap zoom
+".upgrade:active { background-color: #3e8e41; }" // Visual feedback
 "#cookie { width: 150px; height: 150px; }" // Smaller cookie for mobile
 
 "@media (max-width: 600px) {" + // Mobile-specific styles
