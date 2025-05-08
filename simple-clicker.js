@@ -182,86 +182,102 @@ cookieElement.addEventListener('touchend', () => {
 
 // Apply CSS styles
 function applyStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        #game-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        #cookie {
-            width: 200px;
-            height: 200px;
-            cursor: pointer;
-            transition: transform 0.1s;
-            margin: 20px auto;
-        }
-        
-        #cookie:active {
-            transform: scale(0.95);
-        }
-        
-        #counter {
-            font-size: 24px;
-            margin: 20px 0;
-        }
-        
-        #upgrades {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .upgrade {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .upgrade:hover {
-            background-color: #45a049;
-        }
-        
-        .upgrade:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        #stats {
-            margin-top: 20px;
-            text-align: left;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        
-        .achievement {
-            background-color: gold;
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin: 5px 0;
-            display: inline-block;
-        }
-    `;
-    document.head.appendChild(style);
+  const style = document.createElement('style');
+  style.textContent = `
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 10px;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    
+    #game-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    #cookie {
+      width: 150px;
+      height: 150px;
+      cursor: pointer;
+      transition: transform 0.1s;
+      margin: 15px auto;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    #cookie:active, #cookie.touch-active {
+      transform: scale(0.9);
+    }
+    
+    #counter {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+    
+    #upgrades {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .upgrade {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .upgrade:active {
+      background-color: #3e8e41;
+    }
+    
+    .upgrade:disabled {
+      background-color: #cccccc;
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 600px) {
+      #cookie {
+        width: 120px;
+        height: 120px;
+      }
+      
+      #upgrades {
+        flex-direction: column;
+      }
+      
+      .upgrade {
+        padding: 15px;
+        font-size: 16px;
+      }
+    }
+    
+    /* Disable text selection */
+    * {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    
+    /* Disable zooming */
+    html {
+      touch-action: manipulation;
+    }
+  `;
+  document.head.appendChild(style);
 }
 
 // Main game loop
