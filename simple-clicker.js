@@ -71,7 +71,13 @@ function createUI() {
     const title = document.createElement('h1');
     title.textContent = 'Cookie Clicker';
     gameContainer.appendChild(title);
-    
+
+    // Inside createUI() where you create the cookie element
+cookieElement.onerror = function() {
+    console.error("Cookie image failed to load!");
+    this.style.backgroundColor = "#8B4513"; // Brown fallback
+    this.style.borderRadius = "50%";
+};
     // Rest of your UI creation code...
 }
     // Apply styles
