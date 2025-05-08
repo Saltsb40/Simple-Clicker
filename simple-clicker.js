@@ -60,12 +60,20 @@ function init() {
 }
 
 // Create all UI elements
+// Inside createUI() function
 function createUI() {
-    // Main container
+    // Create game container
     const gameContainer = document.createElement('div');
     gameContainer.id = 'game-container';
     document.body.appendChild(gameContainer);
     
+    // Add title
+    const title = document.createElement('h1');
+    title.textContent = 'Cookie Clicker';
+    gameContainer.appendChild(title);
+    
+    // Rest of your UI creation code...
+}
     // Apply styles
     applyStyles();
     // In applyStyles(), add to the CSS:
