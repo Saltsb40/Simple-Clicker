@@ -4,6 +4,24 @@ let cookiesPerSecond = 0;
 let totalCookiesClicked = 0;
 let lastUpdateTime = Date.now();
 
+function createFloatingNumber() {
+    const floatingText = document.createElement('div');
+    floatingText.textContent = `+${(1 * getPrestigeMultiplier()).toFixed(1)}`;
+    floatingText.style.position = 'absolute';
+    floatingText.style.color = '#8B4513';
+    floatingText.style.fontWeight = 'bold';
+    floatingText.style.pointerEvents = 'none';
+    floatingText.style.animation = 'floatUp 1s forwards';
+    
+    // Position near the cookie
+    const rect = cookieElement.getBoundingClientRect();
+    floatingText.style.left = `${rect.left + rect.width/2}px`;
+    floatingText.style.top = `${rect.top}px`;
+    
+    document.body.appendChild(floatingText);
+    setTimeout(() => floatingText.remove(), 1000);
+}
+
 // Upgrades data
 const upgrades = {
     cursor: { name: "Cursor", cost: 50, cps: 0.1, owned: 0, element: null },
@@ -50,7 +68,11 @@ function createUI() {
     
     // Apply styles
     applyStyles();
-    
+    // In applyStyles(), add to the CSS:
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
     // Title
     const title = document.createElement('h1');
     title.textContent = 'Cookie Clicker';
@@ -72,7 +94,26 @@ function createUI() {
     cookieElement.src = 'https://cdn.pixabay.com/photo/2014/04/03/00/41/cookie-309171_960_720.png';
     cookieElement.alt = 'Cookie';
     gameContainer.appendChild(cookieElement);
+    cookieElement.addEventListener('click', () => {
+    cookies += 1 * getPrestigeMultiplier();
+    totalCookiesClicked += 1;
+    cookieElement.addEventListener('click', () => {
+    // ... existing code ...
+    createFloatingNumber();  // Add this line
+    // ... rest of your code ...
+});
+    // Visual feedback (add these lines)
+    cookieElement.style.transform = 'scale(0.95)';
+    setTimeout(() => { cookieElement.style.transform = 'scale(1)'; }, cookieElement.addEventListener('click', () => {
+    cookies += 1 * getPrestigeMultiplier();
+    totalCookiesClicked += 1;
     
+    checkAchievements();
+    updateUI();
+});
+    checkAchievements();
+    updateUI();
+});
     // Upgrades container
     upgradesContainer = document.createElement('div');
     upgradesContainer.id = 'upgrades';
